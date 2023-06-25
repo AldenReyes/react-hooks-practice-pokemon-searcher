@@ -2,11 +2,11 @@ import React from "react";
 import PokemonCard from "./PokemonCard";
 import { Card } from "semantic-ui-react";
 
-function PokemonCollection({ pokemonList }) {
-  if (pokemonList === []) {
+function PokemonCollection({ pokemonToDisplay }) {
+  if (pokemonToDisplay === []) {
     return <div>Loading ...</div>;
   } else {
-    const cards = pokemonList.map((pokemon) => (
+    const cards = pokemonToDisplay.map((pokemon) => (
       <PokemonCard
         key={pokemon.id}
         name={pokemon.name}
