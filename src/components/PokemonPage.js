@@ -29,11 +29,33 @@ function PokemonPage() {
     );
   }
 
+  function handleFormSubmit(event, formData) {
+    const newPokemon = {
+      name: formData.name,
+      hp: formData.hp,
+      sprites: {
+        front: formData.frontUrl,
+        back: formData.backUrl,
+      },
+    };
+    event.preventDefault();
+    fetch("http://localhost:3001/pokemon", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPokemon),
+    })
+      .then((res) => res.json())
+      .then((data) => setPokemonList([...pokemonList, data]))
+      .catch((error) => console.log("ERROR:", error));
+  }
+
   return (
     <Container>
       <h1>Pokemon Searcher</h1>
       <br />
-      <PokemonForm />
+      <PokemonForm onHandleFormSubmit={handleFormSubmit} />
       <br />
       <Search onHandleSearch={handleSearch} search={search} />
       <br />
